@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_cake_shop_project/views/about_ui.dart';
 import 'package:flutter_cake_shop_project/views/bank_ui.dart';
 import 'package:flutter_cake_shop_project/views/emg_ui.dart';
 import 'package:flutter_cake_shop_project/views/pub_ui.dart';
@@ -32,7 +33,7 @@ class _HomeUiState extends State<HomeUi> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'สายด่วน THAILAND',
+              '           สายด่วน THAILAND',
               style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
@@ -42,7 +43,31 @@ class _HomeUiState extends State<HomeUi> {
           ],
         ),
         centerTitle: true,
+
+        //ทำปุ่มกดไปหน้า About
+        //ใช้actionsเพื่อจัดวางปุ่มไอคอนไว้ที่มุมขวาบนสุดของAppBar
+        //ตามมาตรฐาน Material Design //และรองรับการใส่หลายปุ่มเรียงกันได้
+        actions: [
+          Padding(
+            padding: EdgeInsets.only(right: 20.0,),
+            child: IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AboutUi(),
+                  ),
+                );
+              },
+              icon: Icon(
+                Icons.info_outline,
+                color: Colors.black,
+              ),
+            ),
+          ),
+        ],
       ),
+
       //ทำปุ่มข้างล่าง
       bottomNavigationBar: BottomNavigationBar(
         onTap: (value) {
@@ -110,6 +135,7 @@ class _HomeUiState extends State<HomeUi> {
           ),
         ],
       ),
+
       //ส่วนของ body ทั้งหมด
       body: subViewShow[selectedIndex],
     );
