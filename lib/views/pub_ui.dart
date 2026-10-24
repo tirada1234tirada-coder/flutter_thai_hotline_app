@@ -1,6 +1,7 @@
 // ignore_for_file: camel_case_types, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 //Class Model
 class Public_utilityItem {
@@ -23,6 +24,16 @@ class PubUi extends StatefulWidget {
 }
 
 class _PubUiState extends State<PubUi> {
+
+  //โทรออกได้
+  Future<void> _makePhoneCall(String phoneNumber) async {
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: phoneNumber.trim(),
+    );
+    await launchUrl(launchUri);
+  }
+
 List<Public_utilityItem> public_utilityList = [
     Public_utilityItem(
       title: 'การไฟฟ้านครหลวง',
@@ -127,6 +138,7 @@ List<Public_utilityItem> public_utilityList = [
 
                 //ดึงข้อมูลจากclassที่เราสร้าง
                 child: ListTile(
+                  onTap: () => _makePhoneCall(item.phone),
                   leading: Image.asset(
                     item.image,
                     width: 40,

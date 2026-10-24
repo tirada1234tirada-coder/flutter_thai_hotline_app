@@ -1,6 +1,7 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 //Class Model
 class EmergencyItem {
@@ -23,6 +24,16 @@ class EmgUi extends StatefulWidget {
 }
 
 class _EmgUiState extends State<EmgUi> {
+
+  //โทรออกได้
+  Future<void> _makePhoneCall(String phoneNumber) async {
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: phoneNumber.trim(),
+    );
+    await launchUrl(launchUri);
+  }
+
   //Listข้อมูลไว้ข้างในState
   List<EmergencyItem> emergencyList = [
     EmergencyItem(
@@ -128,6 +139,7 @@ class _EmgUiState extends State<EmgUi> {
                 
                 //ดึงข้อมูลจากclassที่เราสร้าง
                 child: ListTile(
+                  onTap: () => _makePhoneCall(item.phone),
                   leading: Image.asset(
                     item.image,
                     width: 40,

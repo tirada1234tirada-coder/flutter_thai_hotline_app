@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 //Class Model
 class BankItem {
@@ -21,6 +22,16 @@ class BankUi extends StatefulWidget {
 }
 
 class _BankUiState extends State<BankUi> {
+
+  //โทรออกได้
+  Future<void> _makePhoneCall(String phoneNumber) async {
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: phoneNumber.trim(),
+    );
+    await launchUrl(launchUri);
+  }
+
   List<BankItem> bankList = [
     BankItem(
       title: 'ธนาคารกรุงเทพ',
@@ -160,6 +171,7 @@ class _BankUiState extends State<BankUi> {
 
                 //ดึงข้อมูลจากclassที่เราสร้าง
                 child: ListTile(
+                  onTap: () => _makePhoneCall(item.phone),
                   leading: Image.asset(
                     item.image,
                     width: 40,
